@@ -1,5 +1,5 @@
 
-const twoNumberSum =({numbers, targetSum})=>{
+const calcTwoNumberSum =({numbers, targetSum})=>{
 
     let result = [];
 
@@ -15,4 +15,4 @@ const twoNumberSum =({numbers, targetSum})=>{
     return result
 }
 
-export default twoNumberSum;
+export default calcTwoNumberSum;
