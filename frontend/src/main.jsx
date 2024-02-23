@@ -1,10 +1,16 @@
 
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import App from './App';
+import store from './Redux/store/store.js';
+import axios from 'axios';
+
+ axios.defaults.baseURL = "http://localhost:3001"; // LOCAL
+// axios.defaults.baseURL = ""; // DEPLOY
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>
 
 )
