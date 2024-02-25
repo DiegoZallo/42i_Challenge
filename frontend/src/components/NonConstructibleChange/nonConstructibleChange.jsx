@@ -1,27 +1,31 @@
 import { useState } from 'react'
-import calcNonConstructibleChange from './calcNonConstructibleChange'
+import { useDispatch, useSelector } from "react-redux";
+import { get_NonConstChg } from '../../Redux/actions/actions';
 
 const NonConstructibleChange =()=>{
-    const [coins, setCoins] = useState({values:'', result:0})
+    const [coins, setCoins] = useState({values:''})
+    const dispatch = useDispatch();
+    const result = useSelector(state=>state.nccResult)
+
     const handleCoinChange = (event) => {
         setCoins({...coins,
           [event.target.name]: event.target.value})
       }
     
-      const handleCoins = ()=>{
-        setCoins({...coins,
-                  result:calcNonConstructibleChange(coins.values)})
+      const handleCoins = async()=>{
+        dispatch(get_NonConstChg(coins.values))
+
       }    
     return (
         <div className='container'>
         <h2>Non-Constructible Change</h2>
         <label htmlFor='coins'>Enter coin number/s separated by space</label>
         <br />
-        <input type='text' name='values' value={coins.values} onChange={handleCoinChange}></input>
+        <input type='text' id='coins' name='values' value={coins.values} onChange={handleCoinChange}></input>
         <br />
 
         <button onClick={handleCoins} className='button'>
-          Result: {coins.result}
+          Result: {result}
         </button>
       </div>
     )

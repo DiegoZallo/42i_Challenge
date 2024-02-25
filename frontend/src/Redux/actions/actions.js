@@ -5,7 +5,7 @@ export const get_TwoNumSum=({numbers, targetSum})=>{
     return async(dispatch) => {
         try {
             const arr = numbers.split(' ').map((number)=>Number(number));
-            const result = (await axios(`/twoNumberSum?numbers=${arr}&targetSum=${targetSum}`)).data
+            const result = (await axios.post('/twoNumberSum', {numbers: arr, targetSum: targetSum})).data
             return dispatch({ 
                 type: GET_TNS, 
                 payload: result
@@ -22,7 +22,7 @@ export const get_NonConstChg=(coins)=>{
     return async (dispatch) => {
         try {            
             let arr = coins.trim().split(' ').map((coin)=>Number(coin)).sort((a, b)=> a-b)
-            const result = (await axios(`/nonConstChg?coins=${arr}`)).data
+            const result = (await axios.post('/nonConstChg', {coins: arr})).data
             return dispatch({ 
                 type: GET_NCC, 
                 payload: result
