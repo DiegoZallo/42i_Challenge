@@ -1,9 +1,14 @@
 const twoNumberSum =  (req, res) => {
     try {
         const {numbers, targetSum} = req.body;
+
+        //Validations:
         if (!Array.isArray(numbers)) return res.status(400).json({error:"Invalid numbers format"})
         if(!Number(targetSum)) return res.status(400).json({error:'Invalid target sum format/value'})  
-        if(!(numbers.length>0)) return res.status(400).json({error:"Can't acept an empty numbers array"})  
+        if(!(numbers.length>0)) return res.status(400).json({error:"Can't acept an empty numbers array"}) 
+        let numbersSet = new Set(numbers);
+        if(numbersSet.size<numbers.length) return res.status(400).json({error:"Can't acept repeated numbers"}) 
+
 
         let result = [];
         const arr = numbers.map((number)=>Number(number)).filter((number)=>{return number !==0});

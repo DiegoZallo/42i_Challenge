@@ -1,42 +1,14 @@
 const supertest = require("supertest-as-promised")(require("../src/app"));
-const Test = require("supertest/lib/test");
 const twoNumberSum = require('../src/routes/twoNumberSum')
 const chai = require('chai');
 const expect = chai.expect;
+const dataTest = require('./utils')
 
 describe("---------- `Two Number Sum` ----------", () => {
 
-    const dataTest = [
-        { // 0
-            numbers: [1, 2, 3, 4, 5],
-            targetSum: 0,
-        },
-        { // 1
-            numbers: [1, 2, 3, 4, 5],
-            targetSum: 'x',
-        },
-        { // 2
-            numbers: [],
-            targetSum: 9,
-        },
-        { // 3
-            numbers: [1, 2, 3, 4, 5],
-            targetSum: 5,
-        },
-        { // 4
-            numbers: [1, 2, 3, 4, 5],
-            targetSum: 12,
-        },
-        { // 5
-            numbers: '[1, 2, 3, 4, 5]',
-            targetSum: 12,
-        }
-    
-    ];
-
     describe('Valid Cases:',()=>{
 
-        it("POST If all values are correct and targetSum can be generated, response should be 200", async () => {
+        it("POST If all values are correct and targetSum can be generated, should return 200", async () => {
             const result = await supertest
               .post('/twoNumberSum')
               .send(dataTest[3]);
@@ -45,7 +17,7 @@ describe("---------- `Two Number Sum` ----------", () => {
             expect(result.body).to.eql([1,4]);
         });
 
-        it("POST If all values are correct and targetSum can Not be generated, response should be 200 and an empty array []", async () => {
+        it("POST If all values are correct and targetSum can Not be generated, should return 200 and empty array", async () => {
             const result = await supertest
               .post('/twoNumberSum')
               .send(dataTest[4]);
@@ -57,7 +29,7 @@ describe("---------- `Two Number Sum` ----------", () => {
 
     describe('Invalid Cases:',()=>{
 
-        it("POST If targetSum is 0, response should be 400", async () => {
+        it("POST If targetSum is 0, should return 400", async () => {
             const result = await supertest
               .post('/twoNumberSum')
               .send(dataTest[0]);
@@ -67,7 +39,7 @@ describe("---------- `Two Number Sum` ----------", () => {
               error: "Invalid target sum format/value",
             });
         });
-        it("POST If targetSum is not a Number, response should be 400", async () => {
+        it("POST If targetSum is not a Number, should return 400", async () => {
             const result = await supertest
               .post('/twoNumberSum')
               .send(dataTest[1]);
@@ -77,7 +49,7 @@ describe("---------- `Two Number Sum` ----------", () => {
               error: "Invalid target sum format/value",
             });
         });
-        it("POST If numbers is empty Array, response should be 400", async () => {
+        it("POST If numbers is empty Array, should return 400", async () => {
             const result = await supertest
               .post('/twoNumberSum')
               .send(dataTest[2]);
@@ -87,7 +59,7 @@ describe("---------- `Two Number Sum` ----------", () => {
               error: "Can't acept an empty numbers array",
             });
         });
-        it("POST If numbers is not an Array, response should be 400", async () => {
+        it("POST If numbers is not an Array, should return 400", async () => {
             const result = await supertest
               .post('/twoNumberSum')
               .send(dataTest[5]);
@@ -95,6 +67,16 @@ describe("---------- `Two Number Sum` ----------", () => {
             expect(result.status).to.eql(400);
             expect(result.body).to.eql({
                 error:"Invalid numbers format"
+            });
+        });
+        it("POST If array contains repeated numbers, should return 400", async () => {
+            const result = await supertest
+              .post('/twoNumberSum')
+              .send(dataTest[6]);
+              
+            expect(result.status).to.eql(400);
+            expect(result.body).to.eql({
+                error:"Can't acept repeated numbers"
             });
         });
     })
