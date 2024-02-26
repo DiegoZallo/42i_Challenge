@@ -9,13 +9,12 @@ const twoNumberSum =  (req, res) => {
         let numbersSet = new Set(numbers);
         if(numbersSet.size<numbers.length) return res.status(400).json({error:"Can't acept repeated numbers"}) 
 
-
         let result = [];
+        //creates an array with only numbers and !== 0
         const arr = numbers.map((number)=>Number(number)).filter((number)=>{return number !==0});
         
-
         let sum = 0
-        
+        //Sums first number in the array with the next one, and the next and so on, until it matches the target sum. If no match, result is [] 
         for(let i = 0; i < arr.length-1; i++){
             for(let j = i+1; j < arr.length; j++){
                 sum = arr[i] + arr[j]
