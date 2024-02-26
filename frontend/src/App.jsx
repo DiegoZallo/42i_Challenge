@@ -2,10 +2,11 @@ import './App.css'
 import logo42i from './assets/42i.jpg'
 import TwoNumberSum from './components/TwoNumberSum/twoNumberSum';
 import NonConstructibleChange from './components/NonConstructibleChange/nonConstructibleChange';
+import { useSelector } from 'react-redux';
 
 
 const App = ()=> {
-
+  const error = useSelector((state)=>state.global_Error)
   return (
     <>
       <div>
@@ -14,6 +15,7 @@ const App = ()=> {
         </a>
       </div>
       <h1>Challenge</h1>
+      <p style={{color: 'red'}}> {error}</p>
       <TwoNumberSum />
       <NonConstructibleChange />
     </>

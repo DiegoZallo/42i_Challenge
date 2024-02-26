@@ -10,11 +10,13 @@ const calcReducer = (state=initialState, action) =>{
     switch (action.type) {
         case GET_TNS:
             return {...state,
-                    tnsResult: action.payload}
+                    tnsResult: action.payload,
+                    global_Error: ''}
 
         case GET_NCC:
             return {...state,
-                    nccResult: action.payload}
+                    nccResult: action.payload,
+                    global_Error: ''}
 
         case ERROR_TYPE:
             return {
