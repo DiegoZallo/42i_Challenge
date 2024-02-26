@@ -7,7 +7,7 @@ This code is the solution for the 2 challenges:
 
 - [Non-Constructible Change](https://42i.notion.site/Non-Constructible-Change-e423c9af05c64621a40bf9dcefee3930)
 
-It has been implemented in javascript with React library and Vite build tool, express, node js. Also, used React-Redux just for fun as it was not necesary for this particular task.   
+It has been implemented in javascript with React library and Vite build tool, express and node js. Also, used React-Redux just for fun as it was not necesary for this particular task.   
 
 
 ## 📋Installation
@@ -25,7 +25,6 @@ Check installed versions:
 ```
 There are 2 root folders. Open a terminal on each of them and install with npm:
 
-
 - backend
 ```bash
   npm i
@@ -36,9 +35,11 @@ There are 2 root folders. Open a terminal on each of them and install with npm:
   npm i
   npm run dev
 ```
+#### 📍 Root structure: 
 
+There is a **src** folder on both sides, there you will find the components and most of the code.
 
-
+![Structure](frontend/src/assets/structure.png)
 
 ## 📋API Reference
 
@@ -85,6 +86,11 @@ There are 2 root folders. Open a terminal on each of them and install with npm:
 
 The project has been deployed on Vercel [https://vercel.com/]
 
+Any change in the main branch (actually is the only one) will be directly aplied on deployed app.
+
+⚠️To change to development⚠️
+
+![Local/Deploy](frontend/src/assets/deployLocal.png)
 
 ## 📋Running Tests
 
